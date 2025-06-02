@@ -1,22 +1,21 @@
-const { criarUsuario } = require("../controller/usuariosController");
-const { executarSQL } = require("../services");
+const { criarUsuario,  apagarUsuario, buscarUmUsuario, buscarUsuarios, editarUsuario } = require("../controller/usuariosController");
 
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
-    res.send( await executarSQL("SELECT * FROM produtos;") );
+    res.send(await buscarUsuarios());
 });
-router.get("/:id", (req, res) => {
-    res.send(`Busca o usuario com o id: ${req.params.id}`);
+router.get("/:id", async (req, res) => {
+    res.send(await buscarUmUsuario(req.params.id));
 });
 router.post("/", async (req, res) => {
     res.send(await criarUsuario(req.body));
 });
-router.put("/:id", (req, res) => {
-    res.send(`Edita um usuario com o id: ${req.params.id}`);
+router.put("/:id", async (req, res) => {
+    res.send(await editarUsuario(req.params.id, req.body));
 });
-router.delete("/:id", (req, res) => {
-    res.send(`Apaga um usuario com o id: ${req.params.id}`);
+router.delete("/:id", async(req, res) => {
+    res.send(await apagarUsuario(req.params.id));
 });
 
 module.exports = router;
