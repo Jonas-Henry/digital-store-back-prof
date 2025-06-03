@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors")
 const app = express();
 const port = 8000;
 
@@ -6,6 +7,8 @@ const { login } = require("./src/controller/usuariosController");
 const { rotaProtegida } = require("./src/utils");
 const usuariosRoutes = require("./src/routes/usuariosRoutes");
 const produtosRoutes = require("./src/routes/produtosRoutes");
+
+app.use(cors())
 
 app.use(express.json());
 
