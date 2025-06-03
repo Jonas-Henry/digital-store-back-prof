@@ -5,6 +5,8 @@ function rotaProtegida(req, res, next){
             mensagem: "Não autorizado"
         });
     }
+
+    next();
 }
 
 module.exports = {
